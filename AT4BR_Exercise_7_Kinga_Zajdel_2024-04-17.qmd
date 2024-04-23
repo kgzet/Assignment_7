@@ -1,0 +1,19 @@
+---
+title: "AT4BR_Exercise_7_Kinga_Zajdel_2024-04-17"
+author: "Kinga Zajdel"
+format: html
+---
+
+## mending the figure
+
+## 
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+*No AI used.*
