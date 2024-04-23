@@ -21,9 +21,10 @@ format: html:
 ## mending the figure
 
 #### about the data
+There is no need to include how many cars were used in the times of the advertisement. Since we are not talking about number of cars being used that time but **percentage of cars bought through previous ten years and still working**, the exact numbers play no role here. Also, the percentage is rounded because in my source there were no precise numbers.
 
-On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-states-historical/> I have found information that in 80's in the US there were around 120.000-140.000 vehicles registered. For the purposes of the task, I assume that there were equal numbers of Chevy, Ford, Toyota, and Nissan/Datsun. As we are not talking about number of cars being used that time but **percentage of cars bought through previous ten years and still working**, the exact numbers play smaller role here.
-Also, the percentage is rounded because in my source there were no precise numbers.
+#### additional information - curiosity
+On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-states-historical/> I have found information that in 80's in the US there were around 120.000-140.000 vehicles registered. For the purposes of the task, I assume that there were equal numbers of Chevy, Ford, Toyota, and Nissan/Datsun. 
 
 ```{r}
 # installing the packages
@@ -37,24 +38,14 @@ Also, the percentage is rounded because in my source there were no precise numbe
 
 ```
 ```{r}
-# setting size of groups
-how_many_Chevy <- 30000
-how_many_Ford <- 30000
-how_many_Toyota <- 30000
-how_many_Nissan_Datsun <- 30000
 
 # setting percentage of still working cars according to the ad
-percent_Chevy <- 0.983
-percent_Ford <- 0.975
-percent_Toyota <- 0.965
-percent_Nissan_Datsun <- 0.953
+percent_Chevy <- 98.3
+percent_Ford <- 97.5
+percent_Toyota <- 96.5
+percent_Nissan_Datsun <- 95.3
 
 # numbers for the data frame
-# cars_dataset <- c(
-#   how_many_Chevy * percent_Chevy,
-#   how_many_Ford * percent_Ford,
-#   how_many_Toyota * percent_Toyota,
-#   how_many_Nissan_Datsun * percent_Nissan_Datsun)
 cars_dataset <- c(
   percent_Chevy,
   percent_Ford,
@@ -73,9 +64,15 @@ cars_ad_data
 How the plot should look like
 
 ```{r}
- ggplot(data = cars_ad_data, aes(x=cars_names))+
+ ggplot(data = cars_ad_data, aes((colour = clarity)))+
+  labs(title="More than 98% of all Chevy trucks sold in the last
+       10 years are still on the road.",
+        x ="", y = "")+
   geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean")+
   scale_fill_viridis_d() + scale_x_discrete(limits = cars_names)
+
+# scale_x_discrete(limits = cars_names) puts the x axis 
+#  in the name-wise order
 ```
 
 
