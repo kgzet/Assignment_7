@@ -32,7 +32,7 @@ On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-st
 # use ggplot2
 # library(ggplot2)
 
-# color-blind friendly palette
+# color-blind friendly palette - if the bars should be in different colours
 # install.packages("viridis")
 # library(viridis)
 
@@ -60,35 +60,49 @@ cars_ad_data<- data.frame(cars_names, cars_dataset)
 cars_ad_data 
 
 ```
-
-How the plot should look like
+How the plot originally looked like
 
 ```{r}
- ggplot(data = cars_ad_data, aes((colour = clarity)))+
+# data - here put the data frame
+# aes x = here data for label x
+# labs: title, x, y - labels of the plot
+# geom_bar - function for barplots
+# coord_cartesian(ylim = c(95, 100)) - allows to zoom the plot
+# scale_x_discrete - puts the x axis according to data frame sequence
+
+ ggplot(data = cars_ad_data, aes(x = cars_names))+
   labs(title="More than 98% of all Chevy trucks sold in the last
        10 years are still on the road.",
         x ="", y = "")+
-  geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean")+
-  scale_fill_viridis_d() + scale_x_discrete(limits = cars_names)
+  geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean", fill="dodgerblue1")+
+  coord_cartesian(ylim = c(95, 100))+
+  scale_x_discrete(limits = cars_names)
+```
+
+How the plot should look like - we can hardly see differences between the bars!
+
+```{r}
+ ggplot(data = cars_ad_data, aes(x = cars_names))+
+  labs(title="More than 98% of all Chevy trucks sold in the last
+       10 years are still on the road.",
+        x ="", y = "")+
+  geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean", fill="dodgerblue1")+
+  scale_x_discrete(limits = cars_names)+
+  geom_text(aes(y=cars_dataset, label=cars_dataset), 
+    vjust=2.5, colour="white")
 
 # scale_x_discrete(limits = cars_names) puts the x axis 
 #  in the name-wise order
-```
 
+# geom_text - I have added percentage on the bars
 
-
-```{r}
-ggplot(data.frame(x = cars_names, y = cars_dataset), aes(x = x, y = y)) +
-  coord_fixed() +
-  scale_fill_viridis() + theme_bw()
-
-```
-
-```{r}
-ggplot(data=cars_ad_data, aes(x=cars_dataset, y=cars_dataset)) +
-  geom_bar(stat="identity", fill="steelblue")+
-  geom_text(aes(label=cars_dataset), vjust=-0.3, size=3.5)+
-  theme_minimal()
+# option with different colours of the columns
+#  ggplot(data = cars_ad_data, aes(x = cars_names, fill=cars_names))+
+#   labs(title="More than 98% of all Chevy trucks sold in the last
+#        10 years are still on the road.",
+#         x ="", y = "")+
+#   geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean")+
+#   scale_fill_viridis_d() + scale_x_discrete(limits = cars_names)
 
 ```
 
