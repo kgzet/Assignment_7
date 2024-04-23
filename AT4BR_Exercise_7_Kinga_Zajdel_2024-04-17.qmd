@@ -1,18 +1,97 @@
 ---
 title: "AT4BR_Exercise_7_Kinga_Zajdel_2024-04-17"
 author: "Kinga Zajdel"
-format: html
+format: html:
+      embed-resources: true
+      theme: hpstr
+      toc: true
+      toc-color: violet
+      toc-location: left
+      toc-depth: 6
+      toc-expand: 6
+      code-tools:
+        source: true
+        toggle: true
+      code-fold: false
+      code-summary: "Show the code"
+      code-overflow: wrap
+      page-layout: full
 ---
 
 ## mending the figure
 
-## 
+#### about the data
+
+On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-states-historical/> I have found information that in 80's in the US there were around 120.000-140.000 vehicles registered. For the purposes of the task, I assume that there were equal numbers of Chevy, Ford, Toyota, and Nissan/Datsun. As we are not talking about number of cars being used that time but **percentage of cars bought through previous ten years and still working**, the exact numbers play smaller role here.
+Also, the percentage is rounded because in my source there were no precise numbers.
 
 ```{r}
+# installing the packages
+
+# use ggplot2
+# library(ggplot2)
+
+# color-blind friendly palette
+# install.packages("viridis")
+# library(viridis)
+
+```
+```{r}
+# setting size of groups
+how_many_Chevy <- 30000
+how_many_Ford <- 30000
+how_many_Toyota <- 30000
+how_many_Nissan_Datsun <- 30000
+
+# setting percentage of still working cars according to the ad
+percent_Chevy <- 0.983
+percent_Ford <- 0.975
+percent_Toyota <- 0.965
+percent_Nissan_Datsun <- 0.953
+
+# numbers for the data frame
+# cars_dataset <- c(
+#   how_many_Chevy * percent_Chevy,
+#   how_many_Ford * percent_Ford,
+#   how_many_Toyota * percent_Toyota,
+#   how_many_Nissan_Datsun * percent_Nissan_Datsun)
+cars_dataset <- c(
+  percent_Chevy,
+  percent_Ford,
+  percent_Toyota,
+  percent_Nissan_Datsun)
+
+# names for the data frame
+cars_names <- c("Chevy", "Ford", "Toyota", "Nissan_Datsun")
+
+# preparing the dataset for the plot
+cars_ad_data<- data.frame(cars_names, cars_dataset) 
+cars_ad_data 
+
+```
+
+How the plot should look like
+
+```{r}
+ ggplot(data = cars_ad_data, aes(x=cars_names))+
+  geom_bar(aes(y=cars_dataset),stat = "summary", fun = "mean")+
+  scale_fill_viridis_d() + scale_x_discrete(limits = cars_names)
+```
+
+
+
+```{r}
+ggplot(data.frame(x = cars_names, y = cars_dataset), aes(x = x, y = y)) +
+  coord_fixed() +
+  scale_fill_viridis() + theme_bw()
 
 ```
 
 ```{r}
+ggplot(data=cars_ad_data, aes(x=cars_dataset, y=cars_dataset)) +
+  geom_bar(stat="identity", fill="steelblue")+
+  geom_text(aes(label=cars_dataset), vjust=-0.3, size=3.5)+
+  theme_minimal()
 
 ```
 
