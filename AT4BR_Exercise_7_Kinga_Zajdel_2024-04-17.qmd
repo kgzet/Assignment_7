@@ -1,7 +1,8 @@
 ---
 title: "AT4BR_Exercise_7_Kinga_Zajdel_2024-04-17"
 author: "Kinga Zajdel"
-format: html:
+format:
+  html:
       embed-resources: true
       theme: hpstr
       toc: true
@@ -24,7 +25,9 @@ format: html:
 There is no need to include how many cars were used in the times of the advertisement. Since we are not talking about number of cars being used that time but **percentage of cars bought through previous ten years and still working**, the exact numbers play no role here. Also, the percentage is rounded because in my source there were no precise numbers.
 
 #### additional information - curiosity
-On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-states-historical/> I have found information that in 80's in the US there were around 120.000-140.000 vehicles registered. For the purposes of the task, I assume that there were equal numbers of Chevy, Ford, Toyota, and Nissan/Datsun. 
+On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-states-historical/> I have found information that in 80's in the US there were around 120.000-140.000 vehicles registered. 
+
+### the code
 
 ```{r}
 # installing the packages
@@ -37,6 +40,9 @@ On the page: <https://www.statista.com/statistics/1246890/vehicles-use-united-st
 # library(viridis)
 
 ```
+
+Preparing the data
+
 ```{r}
 
 # setting percentage of still working cars according to the ad
